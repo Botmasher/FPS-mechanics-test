@@ -40,7 +40,7 @@ public class scene2 : MonoBehaviour {
 		 *		/!\	For elegance and simplicity, AVOID nested ternaries
 		 *
 		 */	
-		string message = myInt > 0 ? "You are alive!" : "You are dead!";
+		string message = myInt > 0 ? "You are alive!" : "You're dead!";
 
 		Debug.Log (message);
 	}
