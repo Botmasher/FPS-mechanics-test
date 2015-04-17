@@ -47,10 +47,12 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\scripts\CameraLookAt.cs" />
+     <Compile Include="Assets\scripts\CoroutineMvmt.cs" />
      <Compile Include="Assets\scripts\InstantiateBullets.cs" />
      <Compile Include="Assets\scripts\MouseClick.cs" />
      <Compile Include="Assets\scripts\Player2Variables.cs" />
      <Compile Include="Assets\scripts\PlayerVariables.cs" />
+     <Compile Include="Assets\scripts\intermedTests.cs" />
      <Compile Include="Assets\scripts\scene2.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
