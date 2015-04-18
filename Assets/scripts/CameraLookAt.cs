@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿rminausing UnityEngine;
 using System.Collections;
 
 public class CameraLookAt : MonoBehaviour {
@@ -9,7 +9,7 @@ public class CameraLookAt : MonoBehaviour {
 	}
 
 	void Update(){
-		// focus camera on target assigned in Inspector
+		// focus camera on target
 		transform.LookAt(target);
 	}
 }
