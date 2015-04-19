@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class intermedTests : MonoBehaviour {
-	// abstract class for inventories
+	// abstract class for all child inventories
 	public class Items {
 		public int count;
 		public string name;
