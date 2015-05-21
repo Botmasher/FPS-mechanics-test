@@ -3,9 +3,11 @@ using System.Collections;
 
 public class PlayerVariables : MonoBehaviour {
 	// loop test vars -- just to understand behavior of while, do while, for and foreach loops in C#
+	/* currently assigned but never used
 	private int myInt = 0;
 	private bool isLoop = true;
 	private string[] strArray1 = new string[5] {"friends","enemies","weapons","potions","ammo"};
+	*/
 
 	// finds and boxes Inspector component "Light" for this object
 	private Light myLight;
