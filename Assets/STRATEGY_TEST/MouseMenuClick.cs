@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -23,12 +24,14 @@ public class MouseMenuClick : MonoBehaviour {
 	private Transform viewer;
 	private Vector3 viewTarget;
 	public List<GameObject> realms = new List<GameObject> ();
+	private float changeTarget = 3f;	// how close nav target gets before allowing you to mouse to another; higher allows quicker choices
 
 	// UI elements
 	public Canvas menu;
-	public Text menuText;
-	public RectTransform menuImage;
-
+	public Text menuText;				// main text
+	public RectTransform menuImage;		// main bg img
+	public RectTransform menuItems;		// inventory build selection slots, parent of actual icons for those items
+	
 
 	void Awake () {
 
@@ -63,26 +66,26 @@ public class MouseMenuClick : MonoBehaviour {
 		 * 
 		 */
 		if (Input.mousePosition.y < Screen.height * 0.1f) {
-			if (Mathf.Abs (viewer.position.z - world.transform.position.z) < 1f) {
+			if (Mathf.Abs (viewer.position.z - world.transform.position.z) < changeTarget) {
 				viewTarget = bottomPlayer.transform.position;
-			} else if (Mathf.Abs (viewer.position.z - topPlayer.transform.position.z) < 1f) {
+			} else if (Mathf.Abs (viewer.position.z - topPlayer.transform.position.z) < changeTarget) {
 				viewTarget = world.transform.position;
 			} else {
 				// do not lerp down realms
 			}
 		} else if (Input.mousePosition.y > Screen.height * 0.9f) {
-			if (Mathf.Abs (viewer.position.z - world.transform.position.z) < 1f) {
+			if (Mathf.Abs (viewer.position.z - world.transform.position.z) < changeTarget) {
 				viewTarget = topPlayer.transform.position;
-			} else if (Mathf.Abs (viewer.position.z - bottomPlayer.transform.position.z) < 1f) {
+			} else if (Mathf.Abs (viewer.position.z - bottomPlayer.transform.position.z) < changeTarget) {
 				viewTarget = world.transform.position;
 			} else {
 				// do not lerp up realms
 			}
 
 		} else if (Input.mousePosition.x > Screen.width * 0.9f) {
-			if (Mathf.Abs (viewer.position.x - world.transform.position.x) < 1f) {
+			if (Mathf.Abs (viewer.position.x - world.transform.position.x) < changeTarget) {
 				viewTarget = rightPlayer.transform.position;
-			} else if (Mathf.Abs (viewer.position.x - leftPlayer.transform.position.x) < 1f) {
+			} else if (Mathf.Abs (viewer.position.x - leftPlayer.transform.position.x) < changeTarget) {
 				viewTarget = world.transform.position;
 			} else {
 				// do not lerp right realms
@@ -90,7 +93,7 @@ public class MouseMenuClick : MonoBehaviour {
 		} else if (Input.mousePosition.x < Screen.width * 0.1f) {
 			if (Mathf.Abs (viewer.position.x - world.transform.position.x) < 1f) {
 				viewTarget = leftPlayer.transform.position;
-			} else if (Mathf.Abs (viewer.position.x - rightPlayer.transform.position.x) < 1f) {
+			} else if (Mathf.Abs (viewer.position.x - rightPlayer.transform.position.x) < changeTarget) {
 				viewTarget = world.transform.position;
 			} else {
 				// do not lerp left realms
@@ -103,7 +106,7 @@ public class MouseMenuClick : MonoBehaviour {
 
 		// raycast mouse button click
 		if ( Input.GetMouseButtonDown (0) ) {
-			// close UI any open menu
+			// close any open menu
 			if (menu.GetComponent<Canvas> ().enabled) {
 				menu.GetComponent<Canvas> ().enabled = false;
 			}
@@ -120,7 +123,7 @@ public class MouseMenuClick : MonoBehaviour {
 		MoveCamera (viewTarget);
 
 	}
-
+	
 
 	/**
 	 * 	Move camera view towards game object
@@ -138,25 +141,29 @@ public class MouseMenuClick : MonoBehaviour {
 	 * 	Bring up the stats menu contextualized to a particular object
 	 */
 	public void ShowMenu (Transform statsObject) {
+
+		string myText = "";
+	
+		// turn looks off; will be explicitly enabled by clicks
+		// menuItems.gameObject.SetActive (false);
+		menuImage.GetComponent<Image> ().enabled = false;
+
+		// show build inventory; inventory items have own onclick function
+		if (statsObject.tag == "Resources") {
+			menuItems.gameObject.SetActive (true);
+
+		// show player stats
+		} else if (statsObject.name == "Player 1") {
+			menuImage.GetComponent<Image>().enabled = true;
+			myText = statsObject.name.ToUpper() + ":\n" +
+				"Nooopies!" + "\n" +
+					"I am " + statsObject.name + " and you found the menu that is mine of the menus!" + "\n" +
+					"Wha... how could you?";
+		}
+
 		menu.GetComponent<Canvas> ().enabled = true;
 		menuImage.SetSizeWithCurrentAnchors (RectTransform.Axis.Vertical, 200f);
-		menuText.text = statsObject.name.ToUpper() + ":\n" +
-				"Nooopies!" + "\n" +
-				"I am " + statsObject.name + " and you found the menu that is mine of the menus!" + "\n" +
-				"Wha... how could you?";
-
-		// change font colors based on player
-		if (statsObject.name == "Player 1") {
-			menuText.color = Color.blue;
-		} else if (statsObject.name == "Player 2") {
-			menuText.color = Color.red;
-		} else if (statsObject.name == "Player 3") {
-			menuText.color = Color.magenta;
-		} else if (statsObject.name == "Player 4") {
-			menuText.color = Color.cyan;
-		} else if (statsObject.name == "World") {
-			menuText.color = Color.green;
-		}
+		menuText.text = myText;
 
 	}
 
