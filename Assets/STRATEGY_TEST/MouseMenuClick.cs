@@ -31,7 +31,10 @@ public class MouseMenuClick : MonoBehaviour {
 	public Text menuText;				// main text
 	public RectTransform menuImage;		// main bg img
 	public RectTransform menuItems;		// inventory build selection slots, parent of actual icons for those items
-	
+
+	// control flow
+	public bool isInventory;			// player is browsing inventory menus
+
 
 	void Awake () {
 
@@ -145,20 +148,20 @@ public class MouseMenuClick : MonoBehaviour {
 		string myText = "";
 	
 		// turn looks off; will be explicitly enabled by clicks
-		// menuItems.gameObject.SetActive (false);
 		menuImage.GetComponent<Image> ().enabled = false;
 
 		// show build inventory; inventory items have own onclick function
 		if (statsObject.tag == "Resources") {
+			//isInventory = true;
 			menuItems.gameObject.SetActive (true);
-
-		// show player stats
-		} else if (statsObject.name == "Player 1") {
-			menuImage.GetComponent<Image>().enabled = true;
-			myText = statsObject.name.ToUpper() + ":\n" +
+		}
+		// show player stats if clicked on player and not looking at inventory
+		else if (statsObject.name == "Player 1" && !menuItems.gameObject.activeSelf) {
+			menuImage.GetComponent<Image> ().enabled = true;
+			myText = statsObject.name.ToUpper () + ":\n" +
 				"Nooopies!" + "\n" +
-					"I am " + statsObject.name + " and you found the menu that is mine of the menus!" + "\n" +
-					"Wha... how could you?";
+				"I am " + statsObject.name + " and you found the menu that is mine of the menus!" + "\n" +
+				"Wha... how could you?";
 		}
 
 		menu.GetComponent<Canvas> ().enabled = true;
