@@ -17,6 +17,7 @@ public class InventoryManager : MonoBehaviour {
 
 	// controlflow
 	private bool isOnWorld;					// is mouse cursor near world
+	private string playerID;				// the player whose inventory manager this is
 
 	// raycast building placement
 	private Ray ray = new Ray ();
@@ -64,6 +65,7 @@ public class InventoryManager : MonoBehaviour {
 				if (isOnWorld) {
 					// place building in world and start impacting stats
 					Debug.Log ("Adding bldg " + footprint.name + " to world!");
+					WorldManager.thisWorld.AddItem (footprint.name, this.transform.parent.gameObject.name);
 				}
 				Destroy (footprint.gameObject);
 			}
