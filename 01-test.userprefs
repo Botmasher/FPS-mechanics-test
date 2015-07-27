@@ -1,8 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/STRATEGY_TEST/InventoryManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/STRATEGY_TEST/Inventory/Items.cs">
     <Files>
-      <File FileName="Assets/STRATEGY_TEST/InventoryManager.cs" Line="93" Column="3" />
+      <File FileName="Assets/STRATEGY_TEST/InventoryManager.cs" Line="26" Column="2" />
+      <File FileName="Assets/STRATEGY_TEST/Inventory/Items.cs" Line="21" Column="22" />
+      <File FileName="Assets/STRATEGY_TEST/StatsManager.cs" Line="11" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
