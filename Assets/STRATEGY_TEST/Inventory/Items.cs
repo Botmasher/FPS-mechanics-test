@@ -11,25 +11,29 @@ using System.Collections.Generic;
  */
 public class Items : MonoBehaviour {
 
-	Sprite icon;							// player inventory UI image
-	GameObject mesh;						// world footprint and built visual
-	List<int> influences;					// player's influenced stats
+	public class Item {
 
-	// use player script?
-	Transform player;						// determine player possession for stats influence
+		Sprite icon;							// player inventory UI image
+		GameObject mesh;						// world footprint and built visual
+		List<int> influences;					// player's influenced stats
 
-	public Items(Sprite icon, GameObject mesh, List<int> influences) {
-		this.icon = icon;
-		this.mesh = mesh;
-		this.influences = influences;
-	}
+		// use player script?
+		Transform player;						// determine player possession for stats influence
 
-	// influence the player's stats
-	void Stats () {
-		for (int i=0; i<influences.Count; i++) {
-			// select stat from instantiated player stats
-			// impact player stats script
+		public Item (Sprite icon, GameObject mesh, List<int> influences) {
+			this.icon = icon;
+			this.mesh = mesh;
+			this.influences = influences;
 		}
+
+		// influence the player's stats
+		void Stats () {
+			for (int i=0; i<influences.Count; i++) {
+				// select stat from instantiated player stats
+				// impact player stats script
+			}
+		}
+	
 	}
 
 }
