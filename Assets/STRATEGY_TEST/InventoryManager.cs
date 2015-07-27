@@ -89,6 +89,9 @@ public class InventoryManager : MonoBehaviour {
 			footprint = Instantiate (footprintB, Input.mousePosition, Quaternion.identity) as GameObject;
 		}
 
+		// disable item
+
+
 		menuItems.gameObject.SetActive (false);
 		
 	}
