@@ -52,6 +52,7 @@
      <Compile Include="Assets\FPS_TEST\FPSInputManager.cs" />
      <Compile Include="Assets\FollowObject.cs" />
      <Compile Include="Assets\STRATEGY_TEST\Inventory\Items.cs" />
+     <Compile Include="Assets\STRATEGY_TEST\Inventory\Levels.cs" />
      <Compile Include="Assets\STRATEGY_TEST\InventoryManager.cs" />
      <Compile Include="Assets\STRATEGY_TEST\MouseMenuClick.cs" />
      <Compile Include="Assets\STRATEGY_TEST\Stats.cs" />

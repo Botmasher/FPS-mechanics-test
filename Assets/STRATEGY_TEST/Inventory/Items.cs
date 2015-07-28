@@ -13,7 +13,7 @@ public class Items : MonoBehaviour {
 	Sprite icon;
 	GameObject mesh;
 
-	// script for instantiated item object
+	// ref for instantiated item object
 	private Item thisItem;
 
 

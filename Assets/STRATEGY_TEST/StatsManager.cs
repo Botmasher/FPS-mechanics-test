@@ -7,7 +7,12 @@ public class StatsManager : MonoBehaviour {
 	public int playerID;					// player number to pass to stats object
 	Stats.Statistics stats;					// player attributes
 	List<int> updates = new List<int> ();	// stats to update this round
+
 	public bool isStatsChange = false;		// control flow for updating stats
+
+	// player level historical path through game
+	private Levels.Level currentLevel;
+	private List<Levels.Level> pastLevels;
 
 
 	void Start () {

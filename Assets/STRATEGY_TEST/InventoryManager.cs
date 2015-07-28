@@ -13,11 +13,11 @@ public class InventoryManager : MonoBehaviour {
 
 	public GameObject footprintA;			// inventory test footprint 1
 	public GameObject footprintB;			// inventory test footprint 2
-	private GameObject footprint;			// reference to instantiated footprint
 
 	// controlflow
 	private bool isOnWorld;					// is mouse cursor near world
 	private string playerID;				// the player whose inventory manager this is
+	private GameObject footprint;			// reference to instantiated footprint
 
 	// raycast building placement
 	private Ray ray = new Ray ();
