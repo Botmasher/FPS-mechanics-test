@@ -8,16 +8,13 @@ public class InventoryManager : MonoBehaviour {
 
 	public RectTransform menuItems;			// inventory list menu
 
-	public Sprite iconA;					// inventory test icon 1
-	public Sprite iconB;					// inventory test icon 2
-
-	public GameObject footprintA;			// inventory test footprint 1
-	public GameObject footprintB;			// inventory test footprint 2
+	public GameObject myLevel;				// current level, determining icons and inventory
 
 	// controlflow
 	private bool isOnWorld;					// is mouse cursor near world
 	private string playerID;				// the player whose inventory manager this is
 	private GameObject footprint;			// reference to instantiated footprint
+	private bool levelUp = true;
 
 	// raycast building placement
 	private Ray ray = new Ray ();
@@ -29,20 +26,23 @@ public class InventoryManager : MonoBehaviour {
 		menuItems = GameObject.Find ("Inventory").GetComponent<RectTransform> ();
 		mainScript = GameObject.Find ("Play Manager").GetComponent<MouseMenuClick> ();
 
-		// build the right images into the right inventory slots
-		menuItems.GetChild(0).GetComponent<Image> ().sprite = iconA;
-		menuItems.GetChild(1).GetComponent<Image> ().sprite = iconB;
-
-		// make sure that slots onclick functions will send the build items for that icon
-		menuItems.GetChild(0).GetComponent<Button> ().onClick.AddListener (() => BuildItem(iconA));
-		menuItems.GetChild(1).GetComponent<Button> ().onClick.AddListener (() => BuildItem(iconB));
-
 		// make sure this object does not start out clickable or visible
 		menuItems.gameObject.SetActive (false);
 	}
 
 
 	void Update () {
+		// replace inventory UI with new level of items
+		if (levelUp) {
+			// build the right images into the right inventory slots
+			menuItems.GetChild (0).GetComponent<Image> ().sprite = myLevel.GetComponent<Levels> ().thisLevel.builts [0].GetComponent<Items> ().thisItem.icon;
+			menuItems.GetChild (1).GetComponent<Image> ().sprite = myLevel.GetComponent<Levels> ().thisLevel.builts [1].GetComponent<Items> ().thisItem.icon;
+			
+			// make sure that slots onclick functions will send the build items for that icon
+			menuItems.GetChild (0).GetComponent<Button> ().onClick.AddListener (() => BuildItem (myLevel.GetComponent<Levels> ().thisLevel.builts [0].GetComponent<Items> ().thisItem.mesh));
+			menuItems.GetChild (1).GetComponent<Button> ().onClick.AddListener (() => BuildItem (myLevel.GetComponent<Levels> ().thisLevel.builts [1].GetComponent<Items> ().thisItem.mesh));
+			levelUp = false;
+		}
 
 		// raycast from camera to mouse to determine inventory pointer
 		ray = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -79,18 +79,9 @@ public class InventoryManager : MonoBehaviour {
 	 * 	create the building associated with clicked icon
 	 *		/!\	 called via button onclick listener
 	 */ 
-	public void BuildItem (Sprite icon) {
+	public void BuildItem (GameObject mesh) {
 
-		if (icon == iconA) {
-			// instantiate footprintA
-			footprint = Instantiate (footprintA, Input.mousePosition, Quaternion.identity) as GameObject;
-		} else if (icon == iconB) {
-			// instantiate footprintB
-			footprint = Instantiate (footprintB, Input.mousePosition, Quaternion.identity) as GameObject;
-		}
-
-		// disable item
-
+		footprint = Instantiate (mesh, Input.mousePosition, Quaternion.identity) as GameObject;
 
 		menuItems.gameObject.SetActive (false);
 		
