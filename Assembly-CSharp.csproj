@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\DelegatesCoroutineMovement.cs" />
      <Compile Include="Assets\DelegatesTest.cs" />
+     <Compile Include="Assets\EnumerableTest.cs" />
      <Compile Include="Assets\FPS_TEST\FPSBullet.cs" />
      <Compile Include="Assets\FPS_TEST\FPSDeathPit.cs" />
      <Compile Include="Assets\FPS_TEST\FPSGameManager.cs" />
